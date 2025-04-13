@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy New Year</title>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    #fireButton {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      background: #ff4757;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      z-index: 10;
+    }
+
+    .firework {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 20px;
+      background: white;
+      animation: launch 1s ease-out forwards;
+    }
+
+    @keyframes launch {
+      0% { bottom: 0; opacity: 1; }
+      100% { bottom: 70%; opacity: 0; }
+    }
+
+    .explosion {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff0, #f00, #800080);
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: explode 1s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0.2) translate(-50%, -50%); opacity: 1; }
+      100% { transform: scale(1.5) translate(-50%, -50%); opacity: 0; }
+    }
+
+    #message {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2em;
+      text-align: center;
+      display: none;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <button id="fireButton">Fire</button>
+  <div id="message">Happy Sinhala and Tamil New Year Everyone!</div>
+  <footer>Made with sathminofc©</footer>
+
+  <!-- Working whistle and explosion sounds -->
+  <audio id="whistleSound" preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c1fc7168e.mp3?filename=whistle-102536.mp3" type="audio/mp3">
+  </audio>
+
+  <audio id="explosionSound" preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_401c9d9280.mp3?filename=explosion-1-123007.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    const fireButton = document.getElementById("fireButton");
+    const whistleSound = document.getElementById("whistleSound");
+    const explosionSound = document.getElementById("explosionSound");
+    const message = document.getElementById("message");
+
+    fireButton.addEventListener("click", () => {
+      // Launch
+      const firework = document.createElement("div");
+      firework.classList.add("firework");
+      document.body.appendChild(firework);
+      whistleSound.currentTime = 0;
+      whistleSound.play();
+
+      setTimeout(() => {
+        // Explosion
+        const explosion = document.createElement("div");
+        explosion.classList.add("explosion");
+        document
